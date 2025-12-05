@@ -15,6 +15,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 5000;
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -78,7 +82,7 @@ app.post("/upload", upload.array("files", 50), async (req, res) => {
       });
     }
 
-    res.json({ link: `http://localhost:5000/file/${folderId}` });
+    res.json({ link: `${BASE_URL}/file/${folderId}` });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Upload failed" });
@@ -179,6 +183,6 @@ io.on("connection", (socket) => {
 });
 
 // ================= START SERVER =================
-server.listen(5000, () =>
-  console.log("🚀 Server + Socket.IO running on http://localhost:5000")
+server.listen(PORT, () =>
+  console.log(`🚀 Server running on ${BASE_URL}`)
 );
