@@ -82,7 +82,7 @@ app.post("/upload", upload.array("files", 50), async (req, res) => {
       });
     }
 
-    res.json({ link: `${BASE_URL}/file/${folderId}` });
+    res.json({ link: `https://chat-file-shared-backend.onrender.com/file/${folderId}` });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Upload failed" });
