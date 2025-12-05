@@ -34,6 +34,13 @@ cloudinary.config({
 
 const linksDB = {};
 
+app.post("/", (req, res) => {
+  console.log("✅ app.post('/') successfully running...");
+
+  res.send("✔ Your POST request is working!");
+});
+
+
 app.post("/upload", upload.array("files", 50), async (req, res) => {
   try {
     const { title, duration } = req.body;
